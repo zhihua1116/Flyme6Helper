@@ -1,0 +1,24 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Hosts 功能">
+
+        <SwitchPreference
+            android:key="enableHosts"
+            android:summary="开启 Hosts 支持功能"
+            android:title="开启功能"/>
+
+        <SwitchPreference
+            android:dependency="enableHosts"
+            android:title="常规去广告"
+            android:key="enableBlockAdsHosts"
+            android:summary="GitHub上 的 hosts 合集，用于屏蔽国内广告。"/>
+
+        <SwitchPreference
+            android:dependency="enableHosts"
+            android:title="常见国外网站访问支持"
+            android:key="enableGoogleHosts"
+            android:summary="GitHub 上随意找的 hosts，包含了一些常见的国外网站，有时效性。"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

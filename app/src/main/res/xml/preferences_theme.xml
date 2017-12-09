@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="主题和谐">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="enableThemePatch"
+            android:title="Xposed 模式"/>
+
+        <SwitchPreference
+            android:key="enableService"
+            android:title="Root 模式"/>
+
+        <Preference
+            android:key="logsInfo"
+            android:title="日志信息"/>
+
+        <Preference
+            android:key="needToKnow"
+            android:title="使用须知"/>
+
+    </PreferenceCategory>
+</PreferenceScreen >

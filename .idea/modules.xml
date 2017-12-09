@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Flyme6Helper.iml" filepath="$PROJECT_DIR$/Flyme6Helper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MaterialEditText/MaterialEditText.iml" filepath="$PROJECT_DIR$/MaterialEditText/MaterialEditText.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pull/pull.iml" filepath="$PROJECT_DIR$/pull/pull.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="log_mode">
+        <item>仅拦截当前应用日志</item>
+        <item>拦截所有应用日志</item>
+        <item>关闭拦截日志</item>
+    </string-array>
+</resources>
