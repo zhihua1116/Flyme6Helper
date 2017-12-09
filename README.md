@@ -37,5 +37,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 * 现插件博客：[http://zpp0196.me/2017/11/26/flyme6helper](http://zpp0196.me/2017/11/26/flyme6helper)
 * 现插件 GitHub：[https://github.com/zpp0196/Flyme6Helper](https://github.com/zpp0196/Flyme6Helper)
 * 我的 QQ：[794970247](http://sighttp.qq.com/msgrd?v=3&uin=794970247&site=&menu=yes)
-* 我的微博：[http://weibo.com/zpp0196](http://weibo.com/zpp0196)
+* 我的微博：[http://weibo.com/u/5844596591](http://weibo.com/u/5844596591){:target="_blank"}
 * 模块测试群：285880321
