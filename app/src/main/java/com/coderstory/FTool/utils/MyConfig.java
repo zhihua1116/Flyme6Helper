@@ -18,7 +18,7 @@ import de.robv.android.xposed.XSharedPreferences;
 public class MyConfig {
     public static boolean isProcessing = false;
     public static String customizecenterPackageName ="com.meizu.customizecenter";
-    public static String[] supportVersions = new String[]{"6.11.1", "6.12.1", "6.13.1", "6.14.2"};
+    public static String[] supportVersions = new String[]{"6.11.0", "6.12.1", "6.13.1", "6.14.2"};
     public static String dataDir = "/storage/emulated/0/FTool/";
     public static String logDir = dataDir + "logs/";
     public static String vMLogDir = logDir + "logs.txt";

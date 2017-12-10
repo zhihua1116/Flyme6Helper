@@ -83,7 +83,7 @@ public class ThemePatch implements IModule {
             XposedBridge.log("------------------------");
 
             //device_states | doCheckState
-            if(cVersion.equals("6.11.1") || cVersion.equals("6.13.1")){
+            if(cVersion.equals("6.11.0") || cVersion.equals("6.13.1")){
                 findAndHookMethod("com.meizu.customizecenter.h.al", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
             }
             if(cVersion.equals("6.12.1")){
@@ -103,7 +103,7 @@ public class ThemePatch implements IModule {
             findAndHookMethod("com.meizu.customizecenter.common.font.c", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 
             // notification
-            if (cVersion.equals("6.11.1") || cVersion.equals("6.12.1")) {
+            if (cVersion.equals("6.11.0") || cVersion.equals("6.12.1")) {
                 findAndHookMethod("com.meizu.customizecenter.common.f.e", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
                 findAndHookMethod("com.meizu.customizecenter.common.f.e", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
                 findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
