@@ -83,17 +83,21 @@ public class FileHelper {
         return fileText;
     }
 
-    public static boolean setReadable(Context context){
-        final File dataDir = new File(context.getApplicationInfo().dataDir);
-        final File prefsDir = new File(dataDir, "shared_prefs");
-        final File prefsFile = new File(prefsDir, "com.coderstory.FTool_preferences.xml");
-        boolean result = false;
-        if (prefsFile.exists()) {
-            ShellUtils.CommandResult commandResult = ShellUtils.execCommand("chmod 777 " + prefsFile, true);
-            result = commandResult.result == 0;
-            Log.i(TAG, "setReadable:" + (result ? "success" : "failure"));
-        }
-        return result;
+    public static void setReadable(final Context context){
+        new Thread() {
+            @Override
+            public void run() {
+                final File dataDir = new File(context.getApplicationInfo().dataDir);
+                final File prefsDir = new File(dataDir, "shared_prefs");
+                final File prefsFile = new File(prefsDir, "com.coderstory.FTool_preferences.xml");
+                boolean result;
+                if (prefsFile.exists()) {
+                    ShellUtils.CommandResult commandResult = ShellUtils.execCommand("chmod 777 " + prefsFile, true);
+                    result = commandResult.result == 0;
+                    Log.i(TAG, "setReadable:" + (result ? "success" : "failure"));
+                }
+            }
+        }.start();
     }
 
     public static String getReadableFileSize(long size) {

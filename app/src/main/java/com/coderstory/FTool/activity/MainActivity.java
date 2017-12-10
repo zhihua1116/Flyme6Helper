@@ -1,7 +1,9 @@
 package com.coderstory.FTool.activity;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
@@ -31,7 +33,11 @@ import ren.solid.library.utils.SnackBarUtils;
 import ren.solid.library.utils.ViewUtils;
 
 import static com.coderstory.FTool.R.id.navigation_view;
+import static com.coderstory.FTool.utils.MyConfig.kIsRoot;
+import static com.coderstory.FTool.utils.MyConfig.kIsSupport;
+import static com.coderstory.FTool.utils.app.AppUtils.isSupport;
 import static com.coderstory.FTool.utils.file.FileHelper.setReadable;
+import static com.coderstory.FTool.utils.root.SuHelper.canRunRootCommands;
 
 public class MainActivity extends BaseActivity {
 
@@ -59,6 +65,20 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         //mFragmentManager = getSupportFragmentManager();
         mFragmentManager = getFragmentManager();
+    }
+
+    private void check(){
+        new Thread() {
+            @Override
+            public void run() {
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                if(sp.getBoolean(kIsRoot, false) && sp.getBoolean(kIsSupport, false)){
+                    return;
+                }
+                sp.edit().putBoolean(kIsRoot, canRunRootCommands()).apply();
+                sp.edit().putBoolean(kIsSupport, isSupport(MainActivity.this)).apply();
+            }
+        }.start();
     }
 
     private void performCodeWithPermission(){
@@ -106,7 +126,7 @@ public class MainActivity extends BaseActivity {
                 navigationMenuView.setVerticalScrollBarEnabled(false);
             }
         }
-
+        check();
         performCodeWithPermission();
     }
 

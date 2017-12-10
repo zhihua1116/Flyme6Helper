@@ -30,20 +30,11 @@ public class ThemePatch implements IModule {
         try{
             xsp.reload();
             patchcode();
-            //update();
         } catch (ClassNotFoundException e) {
             Log.e(TAG, e.getMessage());
             Log.e(TAG, String.valueOf(e.getCause()));
             e.printStackTrace();
         }
-    }
-
-    private void update() {
-        /*boolean isEnableThemePatch = xsp.getBoolean(MyConfig.kEnableThemePatch, true);
-        if(!isEnableThemePatch){
-            return;
-        }*/
-        findAndHookMethod("com.meizu.advertise.api.AdUpdater", loadPackageParam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
     }
 
     private static void findAndHookMethod(String p1, ClassLoader lpparam, String p2, Object... parameterTypesAndCallback) {

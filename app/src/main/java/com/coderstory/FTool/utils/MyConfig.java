@@ -27,6 +27,8 @@ public class MyConfig {
     public static String kCVersionName = "cVersionName";
     public static String kMVersionCode = "mVersionCode";
     public static String kLogPackName= "hookPackName";
+    public static String kIsRoot= "isRoot";
+    public static String kIsSupport= "isSupport";
 
     public static String XPOSED_TAG = "Xposed";
     public static String[] LOG_METHOD = new String[]{"v", "d", "i", "w", "e"};

@@ -31,9 +31,9 @@ import ren.solid.library.utils.SnackBarUtils;
 import ren.solid.library.utils.ToastUtils;
 import ren.solid.library.utils.ViewUtils;
 
+import static com.coderstory.FTool.utils.MyConfig.kIsRoot;
+import static com.coderstory.FTool.utils.MyConfig.kIsSupport;
 import static com.coderstory.FTool.utils.root.ShellUtils.execCommand;
-import static com.coderstory.FTool.utils.root.SuHelper.canRunRootCommands;
-import static com.coderstory.FTool.utils.app.AppUtils.isSupport;
 import static com.coderstory.FTool.utils.app.AppUtils.getVersionName;
 import static com.coderstory.FTool.utils.app.AppUtils.checkVersion;
 import static com.coderstory.FTool.utils.MyConfig.kEnableThemePatch;
@@ -103,7 +103,7 @@ public class ThemePatchFragment extends PreferenceFragment implements Preference
      * 禁用服务
      */
     private void disabled(){
-        if (canRunRootCommands()) {
+        if (sp.getBoolean(kIsRoot, false)) {
             if(enableService.isChecked()){
                 command = enable;
             }else{
@@ -113,7 +113,7 @@ public class ThemePatchFragment extends PreferenceFragment implements Preference
             startTask();
         } else {
             Log.i("XposedSettingFragment", "can not get root！");
-            SnackBarUtils.makeShort(getView(), "未获取到 Root 权限").danger();
+            SnackBarUtils.makeShort(getView(), "未获取到 Root 权限！").danger();
         }
     }
 
@@ -192,10 +192,10 @@ public class ThemePatchFragment extends PreferenceFragment implements Preference
         textView3.setText("Android 版本：Android " + Build.VERSION.RELEASE + "(API " + Build.VERSION.SDK_INT + ")");
         textView4.setText("ROM 版本：" + execCommand("getprop ro.build.display.id", false).successMsg);
         textView5.setText("Xposed 状态：" + (isEnable() ? "已启用" : "未启用"));
-        textView6.setText("Root 状态：" + (canRunRootCommands() ? "已Root" : "未Root"));
+        textView6.setText("Root 状态：" + (sp.getBoolean(kIsRoot, false) ? "已Root" : "未Root"));
         textView7.setText("当前模块版本：" + BuildConfig.VERSION_NAME);
         textView8.setText("主题美化版本：" + getVersionName(getActivity(), customizecenterPackageName));
-        textView9.setText("是否支持该版本：" + (isSupport(getMContext()) ? "支持" : "不支持"));
+        textView9.setText("是否支持该版本：" + (sp.getBoolean(kIsSupport, false) ? "支持" : "不支持"));
 
         Log.i(TAG, String.valueOf(textView1.getText()));
         Log.i(TAG, String.valueOf(textView2.getText()));
@@ -248,18 +248,18 @@ public class ThemePatchFragment extends PreferenceFragment implements Preference
         updateConfig();
 
         String customizecenterVersionName = sp.getString(kCVersionName, "null");
-        String isSupport = isSupport(getMContext()) ? "支持" : "不支持";
+        String isSupport = sp.getBoolean(kIsSupport, false) ? "支持" : "不支持";
 
         String notSupport = "如果你的「主题美化」版本在 " + supportVersions[0] + " 之前，请安装以前的「Flyme6助手」。\n" +
                 "如果你的「主题美化」版本在 " + supportVersions[supportVersions.length - 1] + " 之后，请联系作者适配。\n\n";
         textView3.setText("你的「主题美化」版本为「" + customizecenterVersionName + "」，该模块" + isSupport + "你的版本！\n\n" +
-                (isSupport(getMContext()) ? "" : notSupport ));
+                (sp.getBoolean(kIsSupport, false) ? "" : notSupport ));
 
         textView4.setText("模式介绍：");
         textView4.setTextSize(16);
         textView4.setTextColor(Color.BLACK);
 
-        textView5.setText("Xposed 模式：开启 Xposed 模式后可以无需 Root 直接无限时长试用主题，该模式目前处于测试阶段。\n\n" +
+        textView5.setText("Xposed 模式：开启 Xposed 模式后可以无需 Root 直接无限时长试用主题，如果你的设备没有获取 Root，该开关默认开启不可关。\n\n" +
                 "Root 模式：开启 Root 模式后可以禁用「主题美化」的恢复服务，如果你的设备已经获取 Root 而且可以试用主题，开启后同样可以无限试用\n\n" +
                 "上面两个模式互不冲突，可以同时开启，请根据你的情况选择使用。\n\n");
 
