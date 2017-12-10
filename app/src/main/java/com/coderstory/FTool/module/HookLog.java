@@ -31,7 +31,7 @@ public class HookLog implements IModule{
 
         final String packName1 = lpparam.packageName;
         xsp.reload();
-        final String packName2 = xsp.getString(kLogPackName, BuildConfig.APPLICATION_ID);
+        final String packName2 = xsp.getString(kLogPackName, "");
 
         // 仅拦截当前应用的 Log
         if(packName1.equals(BuildConfig.APPLICATION_ID) && packName2.equals("this")) {
