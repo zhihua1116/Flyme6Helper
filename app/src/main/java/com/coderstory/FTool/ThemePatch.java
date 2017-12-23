@@ -57,7 +57,6 @@ public class ThemePatch implements IXposedHookLoadPackage{
 			}
 			
 			String cVersion = packageInfo.versionName;
-			String mVersion = BuildConfig.VERSION_NAME;
 			
 			//device_states | doCheckState
 			if(cVersion.equals("6.11.0") || cVersion.equals("6.13.1")){
@@ -66,17 +65,17 @@ public class ThemePatch implements IXposedHookLoadPackage{
 			if(cVersion.equals("6.12.1")){
 				findAndHookMethod("com.meizu.customizecenter.g.ak", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
 			}
-			if(cVersion.equals("6.14.2")){
+			if(cVersion.equals("6.14.2") || cVersion.equals("6.14.3")){
 				findAndHookMethod("com.meizu.customizecenter.h.am", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
 			}
 			
 			//resetToSystemTheme
-			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2
+			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3
 			findAndHookMethod("com.meizu.customizecenter.common.theme.common.b", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 			findAndHookMethod("com.meizu.customizecenter.common.theme.common.b", loadPackageParam.classLoader, "b", boolean.class, XC_MethodReplacement.returnConstant(null));
 			
 			//data/data/com.meizu.customizecenter/font/   system_font
-			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2
+			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3
 			findAndHookMethod("com.meizu.customizecenter.common.font.c", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 			
 			// notification
@@ -86,7 +85,7 @@ public class ThemePatch implements IXposedHookLoadPackage{
 				findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 			}
-			if(cVersion.equals("6.13.1") || cVersion.equals("6.14.2")){
+			if(cVersion.equals("6.13.1") || cVersion.equals("6.14.2") || cVersion.equals("6.14.3")){
 				findAndHookMethod("com.meizu.customizecenter.common.g.f", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.f", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));

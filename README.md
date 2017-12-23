@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ## 支持
 
-目前仅支持 6.11.0、6.12.1、6.13.1、6.14.2，在 Xposed Installer 里面打钩重启即可。
+目前仅支持 6.11.0、6.12.1、6.13.1、6.14.2、6.14.3，在 Xposed Installer 里面打钩重启即可。
 
 ## 感谢
 
