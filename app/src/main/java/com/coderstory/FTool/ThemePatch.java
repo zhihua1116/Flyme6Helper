@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.widget.Toast;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
@@ -49,14 +51,19 @@ public class ThemePatch implements IXposedHookLoadPackage{
 			
 			Object activityThread = XposedHelpers.callStaticMethod(XposedHelpers.findClass("android.app.ActivityThread", null), "currentActivityThread");
 			Context context = (Context)XposedHelpers.callMethod(activityThread, "getSystemContext");
-			PackageInfo packageInfo = null;
+			String cVersion;
 			try{
-				packageInfo = context.getPackageManager().getPackageInfo(loadPackageParam.packageName, 0);
+				cVersion = context.getPackageManager().getPackageInfo(loadPackageParam.packageName, 0).versionName;
 			}catch(PackageManager.NameNotFoundException e){
 				e.printStackTrace();
+				return;
 			}
 			
-			String cVersion = packageInfo.versionName;
+			String mVersion = BuildConfig.VERSION_NAME;
+			
+			XposedBridge.log("Flyme6助手已启用");
+			XposedBridge.log("主题美化版本: " + cVersion);
+			XposedBridge.log("模块版本: " + mVersion);
 			
 			//device_states | doCheckState
 			if(cVersion.equals("6.11.0") || cVersion.equals("6.13.1")){
@@ -65,17 +72,20 @@ public class ThemePatch implements IXposedHookLoadPackage{
 			if(cVersion.equals("6.12.1")){
 				findAndHookMethod("com.meizu.customizecenter.g.ak", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
 			}
-			if(cVersion.equals("6.14.2") || cVersion.equals("6.14.3")){
+			if(cVersion.equals("6.14.2") || cVersion.equals("6.14.3") || cVersion.equals("6.14.4")){
 				findAndHookMethod("com.meizu.customizecenter.h.am", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
+			}
+			if(cVersion.equals("7.0.4")){
+				findAndHookMethod("com.meizu.customizecenter.i.am", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
 			}
 			
 			//resetToSystemTheme
-			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3
+			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3 & 6.14.4 & 7.0.4
 			findAndHookMethod("com.meizu.customizecenter.common.theme.common.b", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 			findAndHookMethod("com.meizu.customizecenter.common.theme.common.b", loadPackageParam.classLoader, "b", boolean.class, XC_MethodReplacement.returnConstant(null));
 			
 			//data/data/com.meizu.customizecenter/font/   system_font
-			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3
+			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3 & 6.14.4 & 7.0.4
 			findAndHookMethod("com.meizu.customizecenter.common.font.c", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 			
 			// notification
@@ -85,11 +95,17 @@ public class ThemePatch implements IXposedHookLoadPackage{
 				findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 			}
-			if(cVersion.equals("6.13.1") || cVersion.equals("6.14.2") || cVersion.equals("6.14.3")){
+			if(cVersion.equals("6.13.1") || cVersion.equals("6.14.2") || cVersion.equals("6.14.3") || cVersion.equals("6.14.4")){
 				findAndHookMethod("com.meizu.customizecenter.common.g.f", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.f", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
+			}
+			if(cVersion.equals("7.0.4")){
+				findAndHookMethod("com.meizu.customizecenter.common.h.g", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
+				findAndHookMethod("com.meizu.customizecenter.common.h.g", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
+				findAndHookMethod("com.meizu.customizecenter.common.h.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
+				findAndHookMethod("com.meizu.customizecenter.common.h.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 			}
 			
 			//主题混搭 ThemeContentProvider query Unknown URI

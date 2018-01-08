@@ -11,7 +11,7 @@
 			android:value="true" />
 		<meta-data
 			android:name="xposeddescription"
-			android:value="Powered by zpp0196" />
+			android:value="无限时长试用主题字体混搭，没有界面，打钩重启即用。" />
 		<meta-data
 			android:name="xposedminversion"
 			android:value="54" />
