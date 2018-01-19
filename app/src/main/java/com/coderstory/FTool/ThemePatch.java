@@ -2,10 +2,8 @@ package com.coderstory.FTool;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.widget.Toast;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -72,7 +70,7 @@ public class ThemePatch implements IXposedHookLoadPackage{
 			if(cVersion.equals("6.12.1")){
 				findAndHookMethod("com.meizu.customizecenter.g.ak", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
 			}
-			if(cVersion.equals("6.14.2") || cVersion.equals("6.14.3") || cVersion.equals("6.14.4")){
+			if(cVersion.equals("6.14.2") || cVersion.equals("6.14.3") || cVersion.equals("6.14.4") || cVersion.equals("6.17.0")){
 				findAndHookMethod("com.meizu.customizecenter.h.am", loadPackageParam.classLoader, "h", Context.class, XC_MethodReplacement.returnConstant(0));
 			}
 			if(cVersion.equals("7.0.4")){
@@ -80,12 +78,12 @@ public class ThemePatch implements IXposedHookLoadPackage{
 			}
 			
 			//resetToSystemTheme
-			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3 & 6.14.4 & 7.0.4
+			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3 & 6.14.4 & 6.17.0 & 7.0.4
 			findAndHookMethod("com.meizu.customizecenter.common.theme.common.b", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 			findAndHookMethod("com.meizu.customizecenter.common.theme.common.b", loadPackageParam.classLoader, "b", boolean.class, XC_MethodReplacement.returnConstant(null));
 			
 			//data/data/com.meizu.customizecenter/font/   system_font
-			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3 & 6.14.4 & 7.0.4
+			// 6.11.1 & 6.12.1 & 6.13.1 & 6.14.2 & 6.14.3 & 6.14.4 & 6.17.0 & 7.0.4
 			findAndHookMethod("com.meizu.customizecenter.common.font.c", loadPackageParam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
 			
 			// notification
@@ -95,7 +93,7 @@ public class ThemePatch implements IXposedHookLoadPackage{
 				findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.f.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 			}
-			if(cVersion.equals("6.13.1") || cVersion.equals("6.14.2") || cVersion.equals("6.14.3") || cVersion.equals("6.14.4")){
+			if(cVersion.equals("6.13.1") || cVersion.equals("6.14.2") || cVersion.equals("6.14.3") || cVersion.equals("6.14.4") || cVersion.equals("6.17.0")){
 				findAndHookMethod("com.meizu.customizecenter.common.g.f", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.f", loadPackageParam.classLoader, "a", String.class, String.class, int.class, XC_MethodReplacement.returnConstant(null));
 				findAndHookMethod("com.meizu.customizecenter.common.g.c", loadPackageParam.classLoader, "a", String.class, String.class, int.class, int.class, int.class, XC_MethodReplacement.returnConstant(null));
