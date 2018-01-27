@@ -24,7 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ## 支持
 
-目前仅支持 6.11.0、6.12.1、6.13.1、6.14.2、6.14.3、6.14.4、6.17.0、7.0.4，在 Xposed Installer 里面打钩重启即可。
+支持 6.11.0、6.12.1、6.13.1、6.14.2、6.14.3、6.14.4、6.17.0、6.17.3、7.0.4等，在 Xposed Installer 里面打钩重启即可。
+更多说明参见[这里](http://zpp0196.me/2017/11/26/flyme6helper)
 
 ## 感谢
 
