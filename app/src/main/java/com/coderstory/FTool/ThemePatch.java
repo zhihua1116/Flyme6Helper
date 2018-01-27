@@ -3,12 +3,10 @@ package com.coderstory.FTool;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
@@ -18,7 +16,7 @@ public class ThemePatch implements IXposedHookLoadPackage{
 		try{
 			XposedHelpers.findAndHookMethod(p1, lpparam, p2, parameterTypesAndCallback);
 		}catch(Throwable throwable){
-			logE(throwable);
+			//
 		}
 	}
 	
@@ -103,18 +101,6 @@ public class ThemePatch implements IXposedHookLoadPackage{
 				}
 			});
 		}
-	}
-	
-	private void logE(Throwable throwable){
-		if(!(throwable instanceof ClassNotFoundException)){
-			XposedBridge.log(throwable);
-		}
-		logE(throwable.getMessage());
-	}
-	
-	private void logE(String msg){
-		if(BuildConfig.DEBUG)
-			Log.e(getClass().getSimpleName(), msg);
 	}
 }
 

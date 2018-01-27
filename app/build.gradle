@@ -6,7 +6,7 @@ android {
         applicationId "com.coderstory.FTool"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 522
+        versionCode 523
         versionName "2.3.0"
     }
     repositories {
